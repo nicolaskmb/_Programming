@@ -9,5 +9,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Exemplo de aplicação escutando na porta  ${port}`)
+  console.log(`Exercicio 1 hospedado em porta:  ${port}`)
 });
