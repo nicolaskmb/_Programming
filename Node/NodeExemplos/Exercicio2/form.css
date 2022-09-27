@@ -1,0 +1,13 @@
+label.lform {
+    display: inline-block;
+    width: 6%;
+}
+
+body{
+    background-color: rgb(26, 22, 22);
+}
+
+button{
+    background-color: rgb(109, 170, 16);
+    margin-left: 50%;
+}
