@@ -1,0 +1,37 @@
+<html>
+    <script>
+    
+        function subtrairNumeros(umNumero, outroNumero) {
+            return new Promise((resolve, reject) => {
+                let sub = umNumero - outroNumero;
+                if (sub > 0) {
+                    resolve(sub);
+                } else {
+                    reject ('Ocorreu um erro');
+                }
+    
+            }
+            )
+            
+        }
+    
+
+        function executar() {
+            subtrairNumeros(9, 3).then(result =>  {
+                console.log('Resultado: ' + result);
+                var obj = document.getElementById('campo');
+                obj.value = result;
+                //document.write('Resultado: ' + result);
+            }).catch(error => {
+                console.dir(error)
+                console.error('Error' + error);
+            });
+        }
+    </script>
+
+    <body>
+        <label for="campo">Resultado: </label>
+        <input type="text" id="campo">
+        <button onclick="Javascript:executar()">Executar</button>
+    </body>
+</html>

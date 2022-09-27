@@ -1,0 +1,15 @@
+<html>
+    <script>
+        var secreta = 'senha123';
+        var tentativas = 3;
+        var resposta = '';
+
+        do { 
+            tentativas -= 1;
+            resposta = prompt('digite a senha secreta!');
+        } while (resposta != secreta && tentativas <= 0 ) {
+            alert('senha incorreta!')
+        }
+
+    </script>
+</html>

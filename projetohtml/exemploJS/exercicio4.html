@@ -1,0 +1,22 @@
+<html>
+    <script>
+        var nota1 = prompt('Nota 1');
+        var nota2 = prompt('Nota 2');
+
+        var media = (parseInt(nota1) + parseInt(nota2))/2;
+        
+        if (media <= 10) {
+        document.writeln('Nota: ' + media + ',');
+        }
+
+        if (media > 10) {
+            document.write('Nota invalida!');
+        } else if (media >= 7) {
+            document.write('aprovado!');
+        } else if (media < 7, media >= 3) {
+            document.write('em recuperacao!');
+        } else {
+            document.write('Tentaremos ano que vem novamente!');
+        }
+    </script>
+</html>

@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <style>
+            .pri {
+                text-align: justify;
+            }
+
+            .sec {
+                visibility: hidden;
+            }
+        </style>
+
+        <script>
+
+            function confirma() {
+
+                var campoNome = document.getElementById('nome');
+                
+                if (campoNome.value == '') {
+                    campoNome.style.borderColor = 'red';
+                    alert('Nome obrigatorio');
+                } else {
+                    document.write('Inscricao confirmada!');
+                }
+            }
+
+            function inscricao() {
+                var d2 = document.getElementById('segunda');
+                d2.style.visibility = 'visible';
+
+                var bt = document.getElementById('botaoInscricao');
+                bt.style.visibility = 'hidden';
+
+                var bt = document.getElementById('botaoConfirma');
+                bt.style.visibility = 'visible';
+            }
+
+        </script>
+    </head>
+    <body>
+        <div id="primeira" class="pri">
+            Inscreva-se para o curso!
+        </div>
+        <div id="segunda" class="sec">
+            <label for="nome">Nome: </label>
+            <input type="text" id="nome">
+            <br>
+            <label for="idade">Idade: </label>
+            <input type="text" id="idade">
+        </div>
+        <button id="botaoInscricao" onclick="Javascript:inscricao()">Inscreva-se</button>
+        <button id="botaoConfirma" onclick="Javascript:confirma()" style="visibility: hidden;">Confirmar</button>
+    </body>
+</html>

@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <style>
+
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            
+            .container {
+                height: 100%;
+                background-color: rgb(143, 143, 143);
+                display: flex;
+                justify-content: space-between;
+
+            }
+
+            .pri {
+                background-color: rgb(201, 175, 146);
+                border: 4px;
+                border-style: dashed;
+                border-color: rgb(169, 106, 194);
+                padding: 100px;
+                margin: 5px;
+                width: 50%;
+            }
+
+            .sec {
+                background-color: rgb(169, 106, 194);
+                border: 4px;
+                border-style: dashed;
+                border-color: rgb(201, 175, 146);
+                padding: 100px;
+                margin: 5px;
+                width: 50%;
+            }
+
+            .t1 {
+                text-align: center;
+                font-size: xx-large;
+                display: grid;
+            }
+
+            .t2 {
+                text-align: center;
+                display: grid;
+                font-size: xx-large;
+            }
+            
+        </style>
+        <script>
+            function muda1() {
+                const randomColor = Math.floor(Math.random()*16777215).toString(16);
+                var d1 = document.getElementById('primeira');
+                d1.style.background = "#" + randomColor;
+            }
+
+            function muda2() {
+                const randomColor = Math.floor(Math.random()*16777215).toString(16);
+                var d2 = document.getElementById('segunda');
+                d2.style.background = "#" + randomColor;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div id="primeira" class="pri">
+                <div class="t1">
+                    Primeira div!
+                    <button style="height: 50px; font-size: medium;" onclick="Javascript:muda1()">Alterar Cor</button>
+                </div>
+            </div>
+            <br>
+            <div id="segunda" class="sec">
+                <div class="t2">
+                    Segunda div!
+                    <button style="height: 50px; font-size: medium;" onclick="Javascript:muda2()">Alterar Cor</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

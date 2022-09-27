@@ -1,0 +1,14 @@
+img {
+    display: block;
+    margin: 2% auto;
+    text-align: center;
+    width: 70%;
+    height: 70%;
+    border-width: 10px;
+    border-style: double;
+    border-radius: 8%;
+    border-color: rgba(46, 8, 46, 0.589);
+}
+body {
+    background-color: rgba(82, 25, 216, 0.377);
+}

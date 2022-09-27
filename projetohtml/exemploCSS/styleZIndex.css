@@ -1,0 +1,54 @@
+div.um {
+    width: 110px;
+    height: 190px;
+
+    position: absolute;
+    left: 130px;
+    top: 20px;
+    z-index: 1;
+
+    transition-property: z-index, top, left;
+    transition-timing-function: linear;
+}
+
+div.um:hover {
+    z-index: 4;
+    top: 10px;
+}
+
+
+
+div.dois {
+    width: 110px;
+    height: 190px;
+
+    position: absolute;
+    left: 260px;
+    top: 20px;
+    z-index: 2;
+
+    transition-property: z-index, top, left;
+    transition-timing-function: linear;
+}
+
+div.dois:hover {
+    z-index: 4;
+    top: 10px;
+}
+
+div.tres {
+    width: 110px;
+    height: 190px;
+
+    position: absolute;
+    left: 390px;
+    top: 20px;
+    z-index: 3;
+
+    transition-property: z-index, top, left;
+    transition-timing-function: linear;
+}
+
+div.tres:hover {
+    top: 10px;
+}

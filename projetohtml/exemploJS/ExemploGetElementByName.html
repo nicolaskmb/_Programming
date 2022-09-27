@@ -1,0 +1,34 @@
+<html>
+    <script>
+        function validateForm() {
+            var colecaodeObjetos = document.getElementsByName("aluno");
+            for (var posicao in colecaodeObjetos) {
+                var objetoMesmo = colecaodeObjetos.item(posicao);
+                objetoMesmo.value = 'teste';
+            }
+
+        }    
+    </script>
+    <body>
+        <label for="nome">Nome:</label>
+        
+        <input type="text" id="nome" name="aluno" />
+        
+        <br><br>
+        <label for="idade">Idade:</label>
+        
+        <input type="text" id="idade" name="aluno" size="4" />
+        
+        <br><br>
+
+        <label for="endereco">Endereço:</label>
+        
+        <input type="text" name="aluno" id="endereco" size="50" />
+        
+        <br><br>
+
+        <button onclick="Javascript:validateForm()">Confirmar</button>
+
+
+    </body>
+</html>

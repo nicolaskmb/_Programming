@@ -1,0 +1,23 @@
+<script>
+    
+    function somarNumeros(umNumero, outroNumero) {
+        return new Promise((resolve, reject) => {
+            let soma = umNumero + outroNumero;
+            if (soma > 0) {
+                resolve(soma);
+            } else {
+                reject ('Ocorreu um erro');
+            }
+
+        }
+        )
+        
+    }
+
+    somarNumeros(10, 5).then(result =>  {
+        console.log('Resultado: ' + result);
+    }).catch(error => {
+        console.error('Error' + error);
+    })
+
+</script>

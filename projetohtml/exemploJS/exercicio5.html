@@ -1,0 +1,24 @@
+<html>
+<script>
+    var senha = "";
+    var tentativas = 0
+
+    while (senha != "secreta" && tentativas < 3) {
+        senha = prompt("informe a senha");
+        tentativas++;
+        //document.write("tentativa " + tentativas)
+    }
+
+    if (senha == "secreta" && tentativas < 3) {
+        document.write("Seja bem vindo!")
+    } else {
+        document.write("acesso bloqueado!")
+    }
+
+
+
+</script>
+
+
+
+</html>

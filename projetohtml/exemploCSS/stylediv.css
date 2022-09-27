@@ -1,0 +1,31 @@
+#teste {
+    display: block;
+    margin: 0px auto;
+    width: 400px;
+    height: 200px;
+    background: rgb(48, 48, 48);
+
+    transition-property: width;
+    transition-duration: 5s;
+    transition-timing-function: ease-out;
+}
+
+#teste:hover {
+    background: rgb(122, 34, 64);
+    width: 100%;
+    height: 100%;
+}
+
+#texto {
+    font-size: 50px;
+    text-align: center;
+    line-height: 200px;
+}
+
+h1{
+    text-align: center;
+}
+
+body {
+    background-color: rgb(65, 65, 65);
+}

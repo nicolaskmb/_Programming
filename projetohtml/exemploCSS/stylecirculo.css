@@ -1,0 +1,38 @@
+#background {
+    display: block;
+    margin: 0px auto;
+    background-color: rgb(7, 7, 7) ;
+    width: 400px;
+    height: 600px;
+    border-radius: 5% ;
+}
+
+#pare {
+    display: block;
+    margin: 0px auto;
+    width: 200px;
+    height: 200px;
+    background: red;
+    border: 0px;
+    border-radius: 100%;
+}
+
+#atencao {
+    display: block;
+    margin: 0px auto;
+    width: 200px;
+    height: 200px;
+    background: yellow;
+    border: 0px;
+    border-radius: 100%;
+}
+
+#podeir {
+    display: block;
+    margin: 0px auto;
+    width: 200px;
+    height: 200px;
+    background: green;
+    border: 0px;
+    border-radius: 100%;
+}

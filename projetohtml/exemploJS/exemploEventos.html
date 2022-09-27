@@ -1,0 +1,28 @@
+<html>
+    <link rel="stylesheet" href="styleeventos.css">
+    <script>
+        function validar() {
+            var valor = document.getElementById('3campo').value;
+
+            if (valor = '') {
+                alert('Terceiro campo e obrigatorio!');
+                return false
+            }
+        }
+    </script>
+    <body onload="Javascript:alert('Escolha uma tartaruga!')" >
+        <div id="button">
+            <button onclick="Javascript:alert('Espada')">Leonardo, 1 clique</button>
+            <button ondblclick="Javascript:alert('Bastao')">Donatello, 2 cliques</button>
+            <button onmouseover="Javascript:alert('Nunchaku')">Michelangelo, passe o mouse</button>
+            <button onmouseout="Javascript:alert('Par de Sai')">Raphael, retire o mouse</button>
+            <br>
+            <label for="campo">Campo!</label>
+            <input onchange="Javascript:alert('Mudou os caracteres do campo!')" type="text" id="campo">
+            <label for="outrocampo">Outro Campo:</label>
+            <input onkeydown="Javascritp:alert('Keydown')" onkeypress="Javascript:alert('Keypress')" type="text" id="outrocampo">
+            <label for="3campo">Terceiro Campo!</label>
+            <input onblur="Javascript:alert('Saiu do campo')" type="text" id="3campo">
+        </div>
+    </body>
+</html>
