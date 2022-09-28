@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <style>
+        label.laForms {
+            display: inline-block;
+            width: 6%;
+        }
+
+        body{
+            background-color: rgb(245, 245, 220);
+        }
+
+        #saveBttn {
+            text-align: center;
+            border-radius: 4px;
+
+            transition-duration: 0.4s;
+        }
+
+        #saveBttn:hover {
+            background-color: rgb(109, 170, 16);
+            color: white;
+        }
+
+        #delBttn {
+            text-align: center;
+            border-radius: 4px;
+
+            transition-duration: 0.4s;
+        }
+
+        #delBttn:hover {
+            background-color: rgb(160, 38, 22);
+            color: white;
+        }
+
+        #botao {
+            margin-left: 22%;
+        }
+
+    </style>
+    <script>
+
+        function pegaCEP(cep) {
+        return new Promise((resolve, reject) => {
+            fetch('https://viacep.com.br/ws/' + cep + '/json/')
+            .then(res => res.json()).then(data => {
+              resolve(data)  
+            }).catch(error => {
+                reject(error);
+            })
+        })
+    }
+    function retornaEndereco() {
+        let obj = document.getElementById('cep');
+        pegaCEP(obj.value).then(dados => {
+            console.dir(dados);
+            console.log(cep)
+            let objRua = document.getElementById('rua');  
+            let objCidade = document.getElementById('cidade');
+            let objBairro = document.getElementById('bairro');
+            let objEstado = document.getElementById('estado');
+
+            console.log(obj.value)
+            objRua.value = dados.logradouro;
+            objCidade.value = dados.localidade;
+            objBairro.value = dados.bairro;
+            objEstado.value = dados.uf;
+
+        }).catch(erro => {
+            
+            console.log(erro);
+        })
+    }
+
+    function validaForm() {
+            let listaId = document.getElementsByTagName('input');
+
+            for (let campo in listaId) {
+                var objeto = listaId.item(campo);
+                if (objeto.value == '' || objeto.value == null) {
+                    objeto.style.borderColor = 'red';
+                } else if (objeto.value != '' || objeto.value != null) {
+                    objeto.style.borderColor = '';
+                }
+            }
+        }
+
+    function excluirForm() {
+        let listaId = document.getElementsByTagName('input');
+
+        for (let campo in listaId) {
+            var objeto = listaId.item(campo);
+                if (objeto.value != '' || objeto.value != null) {
+                objeto.value = null;
+                objeto.style.borderColor = '';
+            }
+        }
+    }
+
+    </script>
+</head>
+<body>
+        <form method="post" style="width: 50%;">
+            <fieldset>
+                <legend>Dados Pessoais</legend>
+                    <label for="nome" class="laForms">Nome:</label>
+                    <input type="text" id="nome">
+                    <br><br>
+                    <label for="cep" class="laForms">CEP:</label>
+                    <input type="text" id="cep" onblur="Javascript:retornaEndereco()">
+                    <br><br>
+                    <label for="rua" class="laForms">Rua:</label>
+                    <input type="text" id="rua">
+                    <br><br>
+                    <label for="bairro" class="laForms">Bairro:</label>
+                    <input type="text" id="bairro">
+                    <br><br>
+                    <label for="cidade" class="laForms">Cidade:</label>
+                    <input type="text" id="cidade">
+                    <br><br>
+                    <label for="estado" class="laForms">Estado:</label>
+                    <input type="text" id="estado">
+                    <br><br>
+            </fieldset>
+        </form>
+        <br>
+        <div id="botao">
+        <button onclick="Javascript:validaForm(); retornaEndereco()" id="saveBttn">Salvar</button>
+        <button onclick="Javascript:excluirForm()" id="delBttn">Excluir</button>
+        </div>
+</body>
+</html>
