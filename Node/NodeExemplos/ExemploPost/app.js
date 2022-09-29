@@ -22,7 +22,7 @@ router.post('/', encodeUrl, (req, res) => {
     let senha = req.body.senha;
 
     if (usuario == "nicolas" && senha == "123") {
-      res.end("Acesso liberado!!!!!");  
+      res.sendfile("acesso.html");  
     } else {
         res.end("<script>alert('Usuário ou senha incorretos!'); history.go(-1); </script>");  
     }

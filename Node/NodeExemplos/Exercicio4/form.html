@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css">
+    <title>Formulario</title>
+    <script src="index.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1><b>Cadastro</b></h1>
+        <form method="post" action="/cliente" style="width: 50%; margin-right: auto; margin-left: auto;">
+                <label for="nome" class="lForms">Nome</label>
+                <br>
+                <input type="text" name="nome" id="nome">
+                <br><br>
+                <label for="cep" class="lForms">CEP</label>
+                <br>
+                <input type="text" name="cep" id="cep" onblur="Javascript:retornaEndereco()">
+                <br><br>
+                <label for="rua" class="lForms">Rua</label>
+                <br>
+                <input type="text" name="rua" id="rua">
+                <br><br>
+                <label for="bairro" class="lForms">Bairro</label>
+                <br>
+                <input type="text" name="bairro" id="bairro">
+                <br><br>
+                <label for="cidade" class="lForms">Cidade</label>
+                <br>
+                <input type="text" name="cidade" id="cidade">
+                <br><br>
+                <label for="estado" class="lForms">Estado</label>
+                <br>
+                <input type="text" name="estado" id="estado">
+                <br><br>
+                <input onclick="Javascript:validaForm(); retornaEndereco()" type="submit" class="btn btn-1 btn-bloco btn-grande" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
