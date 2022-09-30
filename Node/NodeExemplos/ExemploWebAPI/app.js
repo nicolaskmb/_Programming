@@ -55,7 +55,7 @@ app.get('/api/v1/clientes', (req, res) => {
 
 app.get('/api/v1/clientes/:id/', (req, res) => {
 
-    let clienteLocalizado = clientes.find(cliente => cliente.id == req.params.id)
+    let clienteLocalizado = clientes.find(cliente => cliente.id == req.params.id);
     let statusHttp = 200;
     if (clienteLocalizado != null) {
         statusHttp = 404;
@@ -94,6 +94,20 @@ app.post('/api/v1/clientes/', encodeUrl, (req, res) => {
 
     res.writeHead(statusHttp, {"Content-Type": "application/json"});
     res.end(JSON.stringify(novoCliente));
+});
+
+app.put('/api/v1/clientes/:id/', encodeUrl, (req, res) => {
+    let clienteAntigo = clientes.find(cliente => cliente.id == req.params.id);
+    if (clienteAntigo == null) {
+        res.writeHead(400, {"Content-Type": "application/json"});
+        res.end(JSON.stringify("Cliente não localizado com o id: " + req.params.id));
+    } else {
+        let novoCliente = req.body;
+        novoCliente.id = clienteAntigo.id;
+        let campos = ['nome', 'endereco', 'sexo', 'telefone']
+        res.writeHead(201, {"Content-Type": "application/json"});
+        res.end(JSON.stringify(novoCliente));
+    }
 });
 
 app.listen(5000, () => {
