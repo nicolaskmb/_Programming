@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <title>Clientes</title>
+    <link rel="stylesheet" href="styleforms.css" />
+    <script src="index.js"></script>
+  </head>
+
+  <body onload="Javascript:carregaCliente()">
+    <div class="container">
+      <h1><b>Cadastro</b></h1>
+        <div class="formCadastro">
+          <form method="post" action="/api/v1/clientes/">
+            <label for="nome">Nome</label>
+            <input
+              class="inputCadastro"
+              type="text"
+              name="nome"
+              id="nome"
+              required="required"
+            />
+            <br />
+            <label for="telefone">Telefone</label><br />
+            <input
+              class="inputCadastro"
+              type="text"
+              name="telefone"
+              id="telefone"
+              required="required"
+            />
+            <br />
+            <label for="endereco">Endereço</label>
+            <input
+              class="inputCadastro"
+              type="text"
+              name="endereco"
+              id="endereco"
+              required="required"
+            />
+            <br />
+            <label for="sexo">Sexo</label><br />
+            <input
+              class="inputCadastro"
+              type="text"
+              name="sexo"
+              id="sexo"
+              required="required"
+            />
+            <br />
+            <div id="navegacao">
+              <table border="0" width="100%">
+                <tr>
+                  <td>
+                    <input
+                      type="button"
+                      onclick="Javascript:primeiro()"
+                      class="btn btn-1 btn-salvar"
+                      value="Primeiro"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="button"
+                      onclick="Javascript:anterior()"
+                      class="btn btn-1 btn-salvar"
+                      value="Anterior"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="button"
+                      onclick="Javascript:proximo()"
+                      class="btn btn-1 btn-salvar"
+                      value="Próximo"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="button"
+                      onclick="Javascript:ultimo()"
+                      class="btn btn-1 btn-salvar"
+                      value="Último"
+                    />
+                  </td>
+
+              <td>
+                <input
+                  type="button"
+                  onclick="Javascript:adicionar()"
+                  class="btn btn-1 btn-salvar"
+                  value="Adicionar"
+                />
+              </td>
+              <td>
+                <input
+                  type="button"
+                  onclick="Javascript:modificar()"
+                  class="btn btn-1 btn-salvar"
+                  value="Alterar"
+                />
+              </td>
+
+              <td>
+                <input
+                  type="button"
+                  onclick="Javascript:eliminaCliente()"
+                  class="btn btn-1 btn-salvar"
+                  value="Excluir"
+                />
+              </td>
+            </tr>
+          </table>
+          </div>
+        </div>
+      <div id="edicao" style="visibility: hidden">
+        <table width="30%">
+          <tr>
+            <td>
+              <input
+                type="button"
+                class="btn btn-1 btn-salvar"
+                onclick="Javascript:salvar()"
+                value="Salvar"
+              />
+            </td>
+            <td>
+              <input
+                type="button"
+                onclick="Javascript:cancelar()"
+                class="btn btn-1 btn-salvar"
+                value="Cancelar"
+              />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
