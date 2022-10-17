@@ -1,0 +1,415 @@
+<html>
+
+<head>
+    <title>Clientes</title>
+    <link rel="stylesheet" href="styleforms.css" />
+    <script>
+        let codigoCliente = 0;
+        let ultimocCliente = 0;
+        let primeiroCliente = 0;
+        let codigoAnterior = 0;
+        let codigoPosterior = 0;
+        let clienteAtual = null;
+        let novoCliente = false;
+        let token = '';
+
+        function buscaTokenUsuario() {
+            fetch('/user/getUserToken/', {
+                method: 'get',
+                headers: {"Token": token}              
+               
+            }).then((res) => res.json())
+                .then((data) =>  {
+                    token = data.token;
+                  
+                })
+                .catch((err) => console.log(err));
+        }
+        buscaTokenUsuario();
+
+        function primeiro() {
+            buscaPrimeiroCliente();
+            codigoCliente = primeiroCliente;
+            carregaCliente();
+        }
+
+        function ultimo() {
+            buscaUltimoCodigoCliente();
+            codigoCliente = ultimocCliente;
+            carregaCliente();
+        }
+
+        function salvar() {
+
+            clienteAtual.nome = document.getElementById('nome').value;
+            clienteAtual.endereco = document.getElementById('endereco').value;
+            clienteAtual.sexo = document.getElementById('sexo').value;
+            clienteAtual.telefone = document.getElementById('telefone').value;
+
+            let method = "PUT";
+            let endereco = '/api/v1/clientes/' + codigoCliente;
+
+            if (novoCliente) {
+                method = "POST";
+                endereco = '/api/v1/clientes/';
+            }
+
+           var myHeaders = new Headers();
+            myHeaders.append("Token", token);
+            myHeaders.append("Content-Type", "application/json");
+
+            
+
+            var raw = JSON.stringify(clienteAtual);
+
+            var requestOptions = {
+            method: method,
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+
+            fetch(endereco , requestOptions).then((res) => res.json())
+                    .then((data) => {
+
+                        console.log("data");
+                        console.dir(data);
+
+                        if (novoCliente) {
+                            codigoCliente = data.id;
+                        }
+
+                        carregaCliente();
+                        let navegacao = document.getElementById('navegacao');
+                        let edicao = document.getElementById('edicao');
+                        navegacao.style.visibility = 'visible';
+                        edicao.style.visibility = 'hidden';
+                       
+                    })
+                    .catch((err) => {alert(err); console.dir(err);});
+
+        }
+
+        function eliminaCliente() {
+
+            var confirma = confirm("Você realmente deseja excluir esse registro ?");
+            if (confirma) {
+                console.log("vai deletar o: " + codigoCliente);
+                fetch('/api/v1/clientes/' + codigoCliente , {
+                    method: 'delete',
+                    headers: {"Token": token}               
+                
+                }).then((res) => res.json())
+                    .then((data) => {
+                        alert("Registro Eliminado!");
+                        buscaUltimoCodigoCliente();
+                        buscaPrimeiroCliente();
+                        codigoCliente = data;    
+                        carregaCliente();
+                    })
+                    .catch((err) => console.log(err));
+            }        
+        }
+
+        
+
+        function buscaUltimoCodigoCliente() {
+            fetch('/api/v1/clientes/ultimo', {
+                method: 'get',
+                headers: {"Token": token}              
+               
+            }).then((res) => res.json())
+                .then((data) => {
+                    ultimocCliente = data;
+                })
+                .catch((err) => console.log(err));
+        }
+        //buscaUltimoCodigoCliente();
+
+        function buscaPrimeiroCliente() {
+            
+            fetch('/api/v1/clientes/primeiro/', {
+                method: 'get',
+                headers: {"Token": token}               
+               
+            }).then((res) => res.json())
+                .then((data) => {
+                    primeiroCliente = data;
+                })
+                .catch((err) => console.log(err));
+        }
+        //buscaPrimeiroCliente();
+        
+
+        function proximo() {
+            if (codigoPosterior != null) {
+                codigoCliente = codigoPosterior;
+                carregaCliente();
+            }
+            
+        }
+
+        function anterior() {
+
+            if (codigoAnterior != null) {
+                codigoCliente = codigoAnterior;
+                carregaCliente();
+            }
+
+        }
+
+        function buscaCliente() {
+            return new Promise((resolve, reject) => {
+                fetch('http://localhost:5001/api/v1/clientes/' + codigoCliente,
+                {   method : 'get',
+                    headers: {"Token": token}})
+                    .then(res => res.json())
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(err => {
+                        reject(err);
+                    })
+            });
+        }
+        function carregaCliente() {
+            console.log('carregaCliente codigoCliente ' + codigoCliente);
+            if (codigoCliente == 0) {
+                buscaPrimeiroCliente();
+                codigoCliente = primeiroCliente; 
+            }
+
+            console.log('carregaCliente depois codigoCliente ' + codigoCliente);
+
+            buscaCliente().then(cliente => {
+                clienteAtual = cliente;
+
+                let campoNome = document.getElementById('nome');
+                campoNome.value = cliente.nome;
+                campoNome.disabled = true;
+
+                let campoTelefone = document.getElementById('telefone');
+                campoTelefone.value = cliente.telefone;
+                campoTelefone.disabled = true;
+
+                let campoSexo = document.getElementById('sexo');
+                campoSexo.value = cliente.sexo;
+                campoSexo.disabled = true;
+
+                let campoEndereco = document.getElementById('endereco');
+                campoEndereco.value = cliente.endereco;
+                campoEndereco.disabled = true;
+
+                if (cliente.prev != null) {
+                    codigoAnterior = cliente.prev;
+                } else {
+                    codigoAnterior = null;
+                }
+
+                
+                if (cliente.next != null) {
+                    codigoPosterior = cliente.next;
+                } else {
+                    codigoPosterior = null;
+                }
+                novoCliente = false;
+                                
+            }).catch(error => {
+                throw('Cliente inexistente com este código ' + codigoCliente);
+          });
+
+        }
+
+        function modificar() {
+                let campoNome = document.getElementById('nome');
+                campoNome.disabled = false;
+
+                let campoTelefone = document.getElementById('telefone');
+                campoTelefone.disabled = false;
+
+                let campoSexo = document.getElementById('sexo');
+                campoSexo.disabled = false;
+
+                let campoEndereco = document.getElementById('endereco');
+                campoEndereco.disabled = false;
+
+                let navegacao = document.getElementById('navegacao');
+                let edicao = document.getElementById('edicao');
+
+                navegacao.style.visibility = 'hidden';
+                edicao.style.visibility = 'visible';
+        }
+        
+
+        function adicionar() {
+                let campoNome = document.getElementById('nome');
+                campoNome.value = '';
+                campoNome.disabled = false;
+
+                let campoTelefone = document.getElementById('telefone');
+                campoTelefone.value = '';
+                campoTelefone.disabled = false;
+
+                let campoSexo = document.getElementById('sexo');
+                campoSexo.value = '';
+                campoSexo.disabled = false;
+
+                let campoEndereco = document.getElementById('endereco');
+                campoEndereco.value = '';
+                campoEndereco.disabled = false;
+
+                let navegacao = document.getElementById('navegacao');
+                let edicao = document.getElementById('edicao');
+
+                navegacao.style.visibility = 'hidden';
+                edicao.style.visibility = 'visible';
+                novoCliente = true;
+        }
+
+
+        function cancelar() {
+            carregaCliente();
+            let navegacao = document.getElementById('navegacao');
+            let edicao = document.getElementById('edicao');
+
+            navegacao.style.visibility = 'visible';
+            edicao.style.visibility = 'hidden';
+        }
+
+    </script>
+    
+
+</head>
+
+<body onload="Javascript:carregaCliente()">
+    <div class="container">
+      <h1><b>Cadastro</b></h1>
+        <div class="formCadastro">
+          <form method="post" action="/api/v1/clientes/">
+            <label for="nome">Nome</label>
+            <input
+              class="inputCadastro"
+              type="text"
+              name="nome"
+              id="nome"
+              required="required"
+            />
+            <br />
+            <label for="telefone">Telefone</label><br />
+            <input
+              class="inputCadastro"
+              type="text"
+              name="telefone"
+              id="telefone"
+              required="required"
+            />
+            <br />
+            <label for="endereco">Endereço</label>
+            <input
+              class="inputCadastro"
+              type="text"
+              name="endereco"
+              id="endereco"
+              required="required"
+            />
+            <br />
+            <label for="sexo">Sexo</label><br />
+            <input
+              class="inputCadastro"
+              type="text"
+              name="sexo"
+              id="sexo"
+              required="required"
+            />
+            <br />
+            <div id="navegacao">
+              <table border="0" width="100%">
+                <tr>
+                  <td>
+                    <input
+                      type="button"
+                      onclick="Javascript:primeiro()"
+                      class="btn btn-1 btn-salvar"
+                      value="Primeiro"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="button"
+                      onclick="Javascript:anterior()"
+                      class="btn btn-1 btn-salvar"
+                      value="Anterior"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="button"
+                      onclick="Javascript:proximo()"
+                      class="btn btn-1 btn-salvar"
+                      value="Próximo"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="button"
+                      onclick="Javascript:ultimo()"
+                      class="btn btn-1 btn-salvar"
+                      value="Último"
+                    />
+                  </td>
+
+              <td>
+                <input
+                  type="button"
+                  onclick="Javascript:adicionar()"
+                  class="btn btn-1 btn-salvar"
+                  value="Adicionar"
+                />
+              </td>
+              <td>
+                <input
+                  type="button"
+                  onclick="Javascript:modificar()"
+                  class="btn btn-1 btn-salvar"
+                  value="Alterar"
+                />
+              </td>
+
+              <td>
+                <input
+                  type="button"
+                  onclick="Javascript:eliminaCliente()"
+                  class="btn btn-1 btn-salvar"
+                  value="Excluir"
+                />
+              </td>
+            </tr>
+          </table>
+          </div>
+        </div>
+      <div id="edicao" style="visibility: hidden">
+        <table width="30%">
+          <tr>
+            <td>
+              <input
+                type="button"
+                class="btn btn-1 btn-salvar"
+                onclick="Javascript:salvar()"
+                value="Salvar"
+              />
+            </td>
+            <td>
+              <input
+                type="button"
+                onclick="Javascript:cancelar()"
+                class="btn btn-1 btn-salvar"
+                value="Cancelar"
+              />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+
+</html>
